@@ -13,11 +13,11 @@ client_role = Role.create(name: 'Client')
 #Create a user that's an admin
 admin = User.create(email: 'example@gmail.com',
                     name: 'Example Name',
-                    password_hash: BCrypt::Password.create('lalala'),
+                    password_digest: BCrypt::Password.create('lalala'),
                     role: admin_role)
 client = User.create(email: 'cliente@gmail.com',
                      name: 'Client Name',
-                     password_hash: BCrypt::Password.create('client'),
+                     password_digest: BCrypt::Password.create('client'),
                      role: client_role)
 
 notification1 = Notification.create(title: 'Example Notification',

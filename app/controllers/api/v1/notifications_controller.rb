@@ -3,17 +3,7 @@
 module Api
   module V1
     class NotificationsController < ApplicationController
-      def index
-        notifications = Notification
-                            .includes(:user_notifications)
-                            .where(user_notifications: { user_id: current_user_id })
-                            .where('date <= ?', Time.zone.now)
-                            .order(date: :desc)
-
-        render json: notifications,
-               each_serializer: NotificationSerializer,
-               adapter: :json_api
-      end
+      before_action :authenticate
 
       def create
         # only admins create notifications
@@ -47,11 +37,6 @@ module Api
                                              :description,
                                              :date,
                                              user_notifications_attributes: [:user_id])
-      end
-
-      def current_user_id
-        # current_user.id
-        User.pluck(:id)
       end
     end
   end

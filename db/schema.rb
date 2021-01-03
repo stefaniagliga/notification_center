@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 2021_01_02_123231) do
   enable_extension "plpgsql"
 
   create_table "notifications", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.datetime "date"
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,10 +41,11 @@ ActiveRecord::Schema.define(version: 2021_01_02_123231) do
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "password_hash", null: false
+    t.string "password_digest", null: false
     t.integer "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email"
   end
 
 end

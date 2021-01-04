@@ -27,10 +27,9 @@ gem 'active_model_serializers', '~> 0.10.12'
 gem 'bcrypt'
 gem 'interactor', '~> 3.0'
 gem 'jwt'
+gem 'pundit'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

@@ -4,7 +4,8 @@ class NotificationSerializer < ActiveModel::Serializer
   attributes :id,
              :title,
              :description,
-             :date
+             :date,
+             :created_by
 
   def date
     object.date.strftime("%m/%d/%Y")

@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 2021_01_02_123231) do
     t.string "title", null: false
     t.text "description", null: false
     t.datetime "date", null: false
+    t.integer "created_by", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_by"], name: "index_notifications_on_created_by"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -30,7 +32,6 @@ ActiveRecord::Schema.define(version: 2021_01_02_123231) do
   create_table "user_notifications", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "notification_id", null: false
-    t.integer "created_by", null: false
     t.boolean "seen", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_123231) do
     t.integer "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

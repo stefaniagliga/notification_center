@@ -22,18 +22,18 @@ client = User.create(email: 'cliente@gmail.com',
 
 notification1 = Notification.create(title: 'Example Notification',
                                     date: Time.zone.now,
-                                    description: 'Lalalala')
+                                    description: 'Lalalala',
+                                    created_by: admin.id)
 notification2 = Notification.create(title: 'Example Notification 2',
                                     date: Time.zone.now,
-                                    description: 'Blabla')
+                                    description: 'Blabla',
+                                    created_by: admin.id)
 
 user_notification1 = UserNotification.create(notification_id: notification1.id,
                                              user_id: client.id,
-                                             seen: false,
-                                             created_by: admin.id)
+                                             seen: false)
 
 user_notification2 = UserNotification.create(notification_id: notification2.id,
                                              user_id: client.id,
-                                             seen: false,
-                                             created_by: admin.id)
+                                             seen: false)
 

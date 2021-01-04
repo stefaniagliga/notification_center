@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   def authenticate
     render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
   end
@@ -31,6 +35,11 @@ class ApplicationController < ActionController::API
   end
 
   private
+
+  def user_not_authorized
+    render json: { errors: 'User not authorized to perform this operation' },
+           status: :forbidden
+  end
 
   def include_params
     (params[:include].to_s.split(',') & permitted_include_params).uniq

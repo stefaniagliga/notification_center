@@ -3,9 +3,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :notifications, only: %i[create]
-      resources :user_notifications, only: %i[index]
+      resources :notifications, only: %i[index create]
+      resources :user_notifications, only: %i[index update]
       resources :sessions, only: %i[create]
+      resources :users, only: %i[index]
     end
   end
 end

@@ -8,7 +8,7 @@ class JsonWebToken
     end
 
     def decode(token)
-      body = JWT.decode(token, hmac_secret ,true, algorithm: 'HS256')[0]
+      body = JWT.decode(token, hmac_secret, true, algorithm: 'HS256')[0]
       HashWithIndifferentAccess.new body
     rescue
       nil

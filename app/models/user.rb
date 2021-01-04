@@ -6,4 +6,12 @@ class User < ApplicationRecord
   has_many :notifications, through: :user_notifications
 
   has_secure_password
+
+  def admin?
+    role.name == 'Admin'
+  end
+
+  def client?
+    role.name == 'Client'
+  end
 end

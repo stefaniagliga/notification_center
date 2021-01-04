@@ -5,8 +5,22 @@ module Api
     class NotificationsController < ApplicationController
       before_action :authenticate
 
+      def index
+        authorize :notification, :can_view_notifications?
+
+        notifications = Notification
+                          .includes(:user_notifications)
+                          .where(created_by: current_user.id)
+
+        render json: notifications,
+               each_serializer: ExtendedNotificationSerializer,
+               include: include_params,
+               adapter: :json_api
+      end
+
       def create
-        # only admins create notifications
+        authorize :notification
+
         notification_context = create_notification
 
         if notification_context.success?
@@ -36,7 +50,11 @@ module Api
         params.require(:notification).permit(:title,
                                              :description,
                                              :date,
-                                             user_notifications_attributes: [:user_id])
+                                             user_ids: [])
+      end
+
+      def permitted_include_params
+        %w[user_notifications]
       end
     end
   end

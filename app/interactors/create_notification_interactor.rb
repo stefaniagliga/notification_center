@@ -5,7 +5,7 @@ class CreateNotificationInteractor
 
   delegate :notification_form, :current_user, :notification_params,to: :context
 
-  # @!method self.call(notification_form:, current_user: current_user)
+  # @!method self.call(notification_form:, current_user:, notification_params:)
   #   @param [NotificationForm] Notification form object
   #   @param [User] Current user
   #   @param [Hash] Notification params
@@ -32,9 +32,7 @@ class CreateNotificationInteractor
   end
 
   def stamped_notification_params
-    notification_params[:user_notifications_attributes].map do |user_notif|
-      user_notif[:created_by] = current_user.id
-    end
+    notification_params[:created_by] = current_user.id
 
     notification_params
   end

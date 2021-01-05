@@ -22,6 +22,8 @@ class CreateNotificationInteractor
   end
 
   def create_notification
+    add_user_ids_params
+
     notification = Notification.new(stamped_notification_params)
 
     if notification.save
@@ -35,5 +37,12 @@ class CreateNotificationInteractor
     notification_params[:created_by] = current_user.id
 
     notification_params
+  end
+
+  def add_user_ids_params
+    return if notification_params[:user_ids]
+
+    user_ids = User.pluck(:id)
+    notification_params[:user_ids] = user_ids
   end
 end

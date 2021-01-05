@@ -10,12 +10,9 @@ module Api
           token = JsonWebToken.encode({ user_id: @user.id })
           render json: { user: @user, token: token }
         else
-          render json: { error: 'Invalid username or password' }
+          render json: { errors: 'Invalid username or password' },
+                 status: :unprocessable_entity
         end
-      end
-
-      def delete
-
       end
 
       private

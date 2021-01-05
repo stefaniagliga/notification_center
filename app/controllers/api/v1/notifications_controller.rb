@@ -11,6 +11,7 @@ module Api
         notifications = Notification
                           .includes(:user_notifications)
                           .where(created_by: current_user.id)
+                          .order(date: :desc)
 
         render json: notifications,
                each_serializer: ExtendedNotificationSerializer,
@@ -29,7 +30,7 @@ module Api
                  status: :created,
                  adapter: :json_api
         else
-          render json: notification_context.errors, status: :unprocessable_entity
+          render json: { errors: notification_context.errors }, status: :unprocessable_entity
         end
       end
 

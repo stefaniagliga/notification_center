@@ -12,13 +12,22 @@ class NotificationForm
   private
 
   def user_ids_exist
-    return if user_ids.present?
+    return unless user_ids.present?
+    return if all_user_ids_exist?
 
-    error_message = 'Please select at least one client id for this notification'
-    errors.add(:user_ids, error_message)
+    msg = "User ids contains ids that do not belong to any user: #{annonymous_user_ids.join(',')}"
+    errors.add(:user_ids, msg)
   end
 
   def date_cannot_be_in_the_past
     errors.add(:date, "can't be in the past") if date.present? && date < Time.zone.now
+  end
+
+  def all_user_ids_exist?
+    true if annonymous_user_ids.empty?
+  end
+
+  def annonymous_user_ids
+    user_ids.map(&:to_i) - User.where(id: user_ids).pluck(:id)
   end
 end

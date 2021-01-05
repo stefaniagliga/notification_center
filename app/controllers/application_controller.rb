@@ -34,8 +34,6 @@ class ApplicationController < ActionController::API
     !!logged_in_user
   end
 
-  private
-
   def user_not_authorized
     render json: { errors: 'User not authorized to perform this operation' },
            status: :forbidden

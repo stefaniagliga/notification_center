@@ -8,10 +8,10 @@ class User < ApplicationRecord
   has_secure_password
 
   def admin?
-    role.name == 'Admin'
+    role.name == 'admin'
   end
 
   def client?
-    role.name == 'Client'
+    role.name == 'client'
   end
 end

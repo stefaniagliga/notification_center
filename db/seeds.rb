@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create the two available roles: Admin and Client
-admin_role = Role.create(name: 'Admin')
-client_role = Role.create(name: 'Client')
+admin_role = Role.create(name: 'admin')
+client_role = Role.create(name: 'client')
 
 #Create a user that's an admin
 admin = User.create(email: 'example@gmail.com',

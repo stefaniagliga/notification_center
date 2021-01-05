@@ -7,10 +7,10 @@ module Api
 
       def index
         user_notifications = UserNotification
-                               .includes(:notification)
-                               .where(user_id: current_user.id)
-                               .where('notifications.date <= ?', Time.zone.now)
-                               .order('notifications.date DESC')
+                              .includes(:notification)
+                              .where(user_id: current_user.id)
+                              .where('notifications.date <= ?', Time.zone.now)
+                              .order('notifications.date DESC')
 
         render json: user_notifications,
                each_serializer: ExtendedUserNotificationSerializer,
@@ -27,7 +27,8 @@ module Api
                  include: include_params,
                  adapter: :json_api
         else
-          render json: update_user_notification_context.errors, status: :unprocessable_entity
+          render json: { errors: update_user_notification_context.errors },
+                 status: :unprocessable_entity
         end
       end
 

@@ -5,5 +5,5 @@ class UserNotificationUpdateForm
 
   attr_accessor :seen
 
-  validates :seen, inclusion: { in: ['true'] }
+  validates :seen, inclusion: { in: ['true'] }, allow_nil: true
 end
